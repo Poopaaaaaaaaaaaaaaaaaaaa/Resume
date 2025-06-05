@@ -29,12 +29,19 @@
 
     <nav>
         <div class="container">
-            <ul>
-                <li><a href="#about" class="content-en active">About</a><a href="#about" class="content-th">เกี่ยวกับ</a></li>
-                <li><a href="#experience" class="content-en active">Experience</a><a href="#experience" class="content-th">ประสบการณ์</a></li>
-                <li><a href="#education" class="content-en active">Education</a><a href="#education" class="content-th">การศึกษา</a></li>
-                <li><a href="#contact" class="content-en active">Contact</a><a href="#contact" class="content-th">ติดต่อ</a></li>
-            </ul>
+            <div class="nav-container">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#about"><span class="content-en active">About</span><span class="content-th">เกี่ยวกับ</span></a></li>
+                    <li><a href="#experience"><span class="content-en active">Experience</span><span class="content-th">ประสบการณ์</span></a></li>
+                    <li><a href="#education"><span class="content-en active">Education</span><span class="content-th">การศึกษา</span></a></li>
+                    <li><a href="#contact"><span class="content-en active">Contact</span><span class="content-th">ติดต่อ</span></a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -88,7 +95,7 @@
                     <p>รับแจ้งปัญหา ตรวจสอบ ซ่อมบำรุง แก้ไข ติดตั้งโปรแกรมพื้นฐานหรืออุปกรณ์ IT ต่างๆ ในสำนักงาน และวางระบบแลนในสำนักงานหรืองาน อีเว้นท์ต่างๆ</p>
                 </div>
             </div>
-</div>
+        </div>
     </section>
 
     <section id="education">
@@ -137,13 +144,6 @@
                     </h3>
                     <p>064-735-3148</p>
                 </div>
-
-                <!--<div class="contact-item animate-on-scroll"> 
-                    <div class="contact-icon">🌐</div>
-                    <h3>GitHub</h3>
-                    <p>github.com/johndoe</p>
-                </div> -->
-
             </div>
         </div>
     </section>
@@ -158,6 +158,31 @@
     </footer>
 
     <script>
+        // Mobile menu toggle functionality
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
         // Language switching functionality
         const langButtons = document.querySelectorAll('.lang-option');
         const contentEn = document.querySelectorAll('.content-en');
